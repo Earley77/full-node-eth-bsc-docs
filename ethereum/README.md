@@ -30,9 +30,9 @@ sudo snap install go --classic
 
 ### Create Prysm BEACON Consensus client
 
-In your /home/ubuntu/ folder (~), create a folder structure as follows:
+In your /home/clint/ folder (~), create a folder structure as follows:
 
-```shell /home/ubuntu/
+```shell /home/clint/
 mkdir ethereum
 cd ethereum
 mkdir consensus
@@ -42,7 +42,7 @@ cd consensus
 
 Istall prysm within the consensus folder created above:
 
-```shell /home/ubuntu/ethereum/consensus/
+```shell /home/clint/ethereum/consensus/
 mkdir prysm && cd prysm
 curl https://raw.githubusercontent.com/prysmaticlabs/prysm/master/prysm.sh --output prysm.sh && chmod +x prysm.sh
 ```
@@ -55,20 +55,20 @@ Generate a JWT auth token. This is required for communication between the execut
 
 Prysm will output your jwt.hex file path, such as:
 
-/home/ubuntu/ethereum/consensus/prysm/jwt.hex
+/home/clint/ethereum/consensus/prysm/jwt.hex
 
 ### Start Prysm Beacon Node
 
 Navigate to your prysm folder
 
 ```shell
-cd /home/ubuntu/ethereum/consensus/prysm/
+cd /home/clint/ethereum/consensus/prysm/
 ```
 
 Replace the --suggested-fee-recipient with your own address below:
 
-```shell /home/ubuntu/ethereum/consensus/prysm/
-./prysm.sh beacon-chain --execution-endpoint=http://localhost:8551 --jwt-secret=/home/ubuntu/ethereum/consensus/prysm/jwt.hex --suggested-fee-recipient=0x0d09aEC2D10F396fB59482644708CBd353798b87
+```shell /home/clint/ethereum/consensus/prysm/
+./prysm.sh beacon-chain --execution-endpoint=http://localhost:8551 --jwt-secret=/home/clint/ethereum/consensus/prysm/jwt.hex --suggested-fee-recipient=0xD582e5D17E7dC2B9457c48b6CA180E8903860b47
 ```
 
 ### Test Geth
@@ -76,10 +76,10 @@ Replace the --suggested-fee-recipient with your own address below:
 Navigate to your Geth execution folder
 
 ```shell
-cd /home/ubuntu/ethereum/execution/
+cd /home/clint/ethereum/execution/
 ```
 
-geth --http --http.addr "0.0.0.0" --http.port "8545" --http.corsdomain "\*" --http.api personal,eth,net,web3,debug,txpool,admin --authrpc.jwtsecret /home/ubuntu/ethereum/consensus/prysm/jwt.hex --ws --ws.port 8546 --ws.api eth,net,web3,txpool,debug --metrics --maxpeers 500
+geth --http --http.addr "0.0.0.0" --http.port "8545" --http.corsdomain "\*" --http.api personal,eth,net,web3,debug,txpool,admin --authrpc.jwtsecret /home/clint/ethereum/consensus/prysm/jwt.hex --ws --ws.port 8546 --ws.api eth,net,web3,txpool,debug --metrics --maxpeers 500
 
 Great. We are now ready to set these up to run as services.
 
